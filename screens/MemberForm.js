@@ -28,7 +28,7 @@ class MemberForm extends React.Component{
           selected2: undefined
         };
       }
-      onValueChange2(value: string) {
+      onValueChange2(value) {
         this.setState({
           selected2: value
         });
