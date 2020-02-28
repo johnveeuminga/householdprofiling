@@ -5,6 +5,7 @@ import { SocialIcon, ButtonGroup } from 'react-native-elements'
 
  class Login extends React.Component{
     render(){
+        const {navigate} =this.props.navigation;
         return(
             <Container style= {{ backgroundColor:'#19f79e'}}>
                 <View   style= {{ justifyContent:'center', alignItems: 'center', paddingTop: 25 }}>
@@ -20,21 +21,20 @@ import { SocialIcon, ButtonGroup } from 'react-native-elements'
                         HOUSEHOLD PROFILING
                     </Text>
                 </View>
-                <View style= {{marginHorizontal:25}}>
-                        <SocialIcon
-                        title='Sign In With Facebook'
-                        button
-                         type='facebook'
-                        />
-                </View>
-
-                <View style={{ marginHorizontal: 25 }}>
-                        <SocialIcon
-                        title='Sign In With Gmail'
-                        button
-                         type='google-plus-official'
-                        />
-                </View>
+                <Button rounded style= {{ marginHorizontal: 33, marginVertical:7, backgroundColor: 'blue', justifyContent:'center'}}
+                onPress={() => navigate('Masterlist')}>      
+                            <Icon ios='ios-person' android="md-person" style={{fontSize: 30, color: 'white' }}/>
+                            <Text style={{ textAlign: 'center', color:'white' }}>
+                            Sign in with Facebook
+                            </Text> 
+                </Button>
+                <Button rounded style= {{ marginHorizontal: 33, marginVertical:7, backgroundColor: 'orange', justifyContent:'center'}}
+                onPress={() => navigate('Masterlist')}>      
+                            <Icon ios='ios-person' android="md-person" style={{fontSize: 30, color: 'white' }}/>
+                            <Text style={{ textAlign: 'center', color:'white' }}>
+                            Sign in with Google
+                            </Text> 
+                </Button>
                 <Button rounded style= {{ marginHorizontal: 33, marginVertical:7, backgroundColor: '#ff4949', justifyContent:'center'}}>      
                             <Icon ios='ios-person' android="md-person" style={{fontSize: 30, color: 'white' }}/>
                             <Text style={{ textAlign: 'center', color:'white' }}>

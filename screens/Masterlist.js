@@ -73,6 +73,8 @@ export default class Masterlist extends Component {
   }
   render() {
     const { search } = this.state;
+    const {navigate} =this.props.navigation;
+
     return (
       <Container>
         <View style = {{ padding: 20}}>
@@ -109,7 +111,7 @@ export default class Masterlist extends Component {
               renderItem={({ item }) => (<Text style={styles.item} onPress={this.GetItem.bind(this, item.address)} >
                 <Text>{item.title}</Text></Text> )}
             /> 
-             <TouchableOpacity onPress={this.joinData} activeOpacity={0.7} style={styles.button} >
+             <TouchableOpacity onPress={() => navigate('Form')} activeOpacity={0.7} style={styles.button} >
               <Text style={styles.buttonText} > New HouseHold </Text>
             </TouchableOpacity>
         </View>
