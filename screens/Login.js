@@ -4,6 +4,9 @@ import {View, Text, StyleSheet, Image} from 'react-native'
 import { SocialIcon, ButtonGroup } from 'react-native-elements'
 
  class Login extends React.Component{
+    navigate(screenName){
+        this.props.navigation.push(screenName)
+    }
     render(){
         return(
             <Container style= {{ backgroundColor:'#19f79e'}}>
@@ -35,7 +38,7 @@ import { SocialIcon, ButtonGroup } from 'react-native-elements'
                          type='google-plus-official'
                         />
                 </View>
-                <Button rounded style= {{ marginHorizontal: 33, marginVertical:7, backgroundColor: '#ff4949', justifyContent:'center'}}>      
+                <Button rounded style= {{ marginHorizontal: 33, marginVertical:7, backgroundColor: '#ff4949', justifyContent:'center'}}  onPress= {() => this.navigate('Login2')}>      
                             <Icon ios='ios-person' android="md-person" style={{fontSize: 30, color: 'white' }}/>
                             <Text style={{ textAlign: 'center', color:'white' }}>
                             Login As Email

@@ -10,6 +10,8 @@ const Stack = createStackNavigator();
 import MemberList from './screens/MemberList'
 import Masterlist from './screens/Masterlist'
 import Login from './screens/Login';
+import Login2 from './screens/Login2';
+
 
 
 class App extends React.Component {
@@ -26,6 +28,8 @@ class App extends React.Component {
         <Stack.Screen name="MemberList" component={MemberList} />
         <Stack.Screen name="Masterlist" component={Masterlist} />
          <Stack.Screen name="Login" component={Login} />
+         <Stack.Screen name="Login2" component={Login2} />
+
       </Stack.Navigator>
     </NavigationContainer>
     );
