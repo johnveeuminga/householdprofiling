@@ -10,7 +10,7 @@ export default class Quarters extends Component {
       selected2: undefined
     };
   }
-  onValueChange2(value: string) {
+  onValueChange2(value) {
     this.setState({
       selected2: value
     });
