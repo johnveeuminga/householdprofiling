@@ -2,79 +2,33 @@ import React, { Component } from 'react';
 import { StyleSheet, FlatList, Text, View, Alert, TouchableOpacity, TextInput } from 'react-native';
 import { Button, Container, Card } from 'native-base';
 import { SearchBar } from 'react-native-elements';
-
+import HouseHoldList from './components/HouseHoldList'
 
 export default class Masterlist extends Component {
-  state = {
-    search: '',
-  };
-
-  updateSearch = search => {
-    this.setState({ search });
-  };
-
-    navigate(screenName){
-        this.props.navigation.push(screenName)
-    }
+  processForm(formDetails) {
+    this.setState((state) => {
+      return {
+        ...state,
+        households: [
+          ...state.households,
+          formDetails,
+        ]
+      }
+    })
+    console.log(formDetails)
+  }
+ 
   constructor(props) {
     super(props);
-    this.array = [
-        {
-            title: 'sample',
-            
-        },
-        {
-            title: 'Superman'
-        },
-        {
-            title: "Gagamboy"
-        },
-        {
-            title: 'Lastikan'
-        }
-    ],
-      this.state = {
-        arrayHolder: [],
-        textInput_Holder: ''
-      }
-  }
-  componentDidMount() {
-    this.setState({ arrayHolder: [...this.array] })
-  }
-  joinData = () => {
-    this.array.push({title : this.state.textInput_Holder});
-    this.setState({ arrayHolder: [...this.array] })
-  }
-  FlatListItemSeparator = () => {
-    return (
-      <Card
-        style={{
-          height: 1,
-          width: "100%",
-          backgroundColor: "#607D8B",
-        }}
-       
-      />
-    
-    );
-  }
-  GetItem(item) {
-    Alert.alert('', 'Personal Info', [
-        {
-            text: 'Quarter: 1st'
-        },
-        {
-            text: 'Address: Kahit Saan'
-        },
-        {
-            text: 'Name: Cardo Dalisay',
-        }
-    ]);
-  }
-  render() {
-    const { search } = this.state;
-    const {navigate} =this.props.navigation;
 
+    this.state = {
+      households: []
+    };
+  }
+
+  render() {
+    const {navigate} =this.props.navigation;
+    
     return (
       <Container>
         <View style = {{ padding: 20}}>
@@ -82,9 +36,6 @@ export default class Masterlist extends Component {
            lightTheme
            round
               placeholder="Type Here..."
-              onChangeText={this.updateSearch}
-              value={search}
-              
             />
         </View>
 
@@ -93,25 +44,20 @@ export default class Masterlist extends Component {
             Recent
           </Text>
         </View>
+        <View>
+        {
+           this.state.households.map((hh) => (
+              <HouseHoldList
+              respondentName={`${hh.lastName}, ${hh.middleName}, ${hh.firstName}`}
+              address={hh.address}
+                />
+              ))
+        }
+        </View>
         <View style={styles.MainContainer}>
-            {/* <TextInput
-              placeholder="Enter Value Here"
-              onChangeText={data => this.setState({ textInput_Holder: data })}
-              style={styles.textInputStyle}
-              underlineColorAndroid='transparent'
-            /> */}
-            
-                
-            <FlatList
-              data={this.state.arrayHolder}
-              width='100%'
-              extraData={this.state.arrayHolder}
-              keyExtractor={(index) => index.toString()}
-              ItemSeparatorComponent={this.FlatListItemSeparator}
-              renderItem={({ item }) => (<Text style={styles.item} onPress={this.GetItem.bind(this, item.address)} >
-                <Text>{item.title}</Text></Text> )}
-            /> 
-             <TouchableOpacity onPress={() => navigate('Form')} activeOpacity={0.7} style={styles.button} >
+             <TouchableOpacity onPress={() => navigate('Modal', {
+               onFormComplete: (formDetails) => this.processForm(formDetails)
+             })} activeOpacity={0.7} style={styles.button} >
               <Text style={styles.buttonText} > New HouseHold </Text>
             </TouchableOpacity>
         </View>

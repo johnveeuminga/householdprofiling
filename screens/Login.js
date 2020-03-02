@@ -4,6 +4,9 @@ import {View, Text, StyleSheet, Image} from 'react-native'
 import { SocialIcon, ButtonGroup } from 'react-native-elements'
 
  class Login extends React.Component{
+    navigate(screenName){
+        this.props.navigation.push(screenName)
+    }
     render(){
         const {navigate} =this.props.navigation;
         return(
@@ -35,15 +38,13 @@ import { SocialIcon, ButtonGroup } from 'react-native-elements'
                             Sign in with Google
                             </Text> 
                 </Button>
-                <Button rounded style= {{ marginHorizontal: 33, marginVertical:7, backgroundColor: '#ff4949', justifyContent:'center'}}>      
+                <Button rounded style= {{ marginHorizontal: 33, marginVertical:7, backgroundColor: '#ff4949', justifyContent:'center'}}
+                onPress={() => navigate('Login2')}>      
                             <Icon ios='ios-person' android="md-person" style={{fontSize: 30, color: 'white' }}/>
                             <Text style={{ textAlign: 'center', color:'white' }}>
                             Login As Email
                             </Text> 
                 </Button>
-              
-
-
             </Container>
         )
     }

@@ -1,53 +1,70 @@
 import React from 'react';
-import { Picker,Icon,View, Text, Card, Button, CardItem, Body, Form, Item, Label, Input, Header, Left, Title, Right, ListItem, Content, CheckBox} 
+import { Container, Picker,Icon,View, Text, Card, Button, CardItem, Body, Form, Item, Label, Input, Header, Left, Title, Right, ListItem, Content, CheckBox} 
 from 'native-base';
 import { ScrollView } from 'react-native'
 import MemberList from './MemberList'
+import { TextInput } from 'react-native-gesture-handler';
 
 
 
 class Home extends React.Component {
+    sampleSubmit() {
+        const {navigate} =this.props.navigation;
+        const form = this.state
+
+        if(!form.firstName) {
+            console.log('error')
+
+            return
+        }
+
+        this.props.route.params.onFormComplete(form)
+        navigate('Masterlist')
+    }
+    
     constructor(props) {
         super(props);
+
         this.state = {
-          selected2: undefined
+          lastName:"",
+          middleName:"",
+          firstName:"",
+          address:"",
         };
       }
-      onValueChange2(value: string) {
-        this.setState({
-          selected2: value
-        });
-      }
+    
+
     render() {
         const {navigate} =this.props.navigation;
         return (
             <ScrollView>
-                <Header>
-                    <Left/>
-                    <Body>
-                        <Title>New Household</Title>
-                    </Body>
-                    <Right />
-                </Header>
                 <View style={{justifyContent: 'center'}}>
                     <Form>
                         <Text style={{fontWeight:'bold', padding:10, backgroundColor: '#80CD91', color: '#5D615B'}}>Name of Respondent</Text>
                         <Item fixedLabel>
-                        <Label style={{fontSize:14}}>Last Name</Label>
-                        <Input />
+                        <TextInput
+                            onChangeText= {(lastName)=>this.setState({lastName})}
+                            placeholder={'Last Name'}
+                        />
                         </Item>
                         <Item fixedLabel>
-                        <Label style={{fontSize:14}}>First Name</Label>
-                        <Input />       
+                        <TextInput
+                            onChangeText= {(middleName)=>this.setState({middleName})}
+                            placeholder={'Middle Name'}
+                        />
                         </Item>
                         <Item fixedLabel>
-                        <Label style={{fontSize:14}}>Middle Name</Label>
-                        <Input />       
+                        <TextInput
+                            onChangeText= {(firstName)=>this.setState({firstName})}
+                            placeholder={'First Name'}
+                        />
                         </Item>
                         <Text style={{fontWeight:'bold', padding:10, backgroundColor: '#80CD91', color: '#5D615B'}}>Current Address</Text>
                         <Item fixedLabel>
-                        <Label style={{fontSize:14}}>Address</Label>
-                        <Input />       
+                        <TextInput
+                            onChangeText= {(address)=>this.setState({address})}
+                            placeholder={'Address'}
+                        />
                         </Item>
                     </Form> 
                 </View>
@@ -62,8 +79,6 @@ class Home extends React.Component {
                         placeholder="Select your SIM"
                         placeholderStyle={{ color: "#bfc6ea" }}
                         placeholderIconColor="#007aff"
-                        selectedValue={this.state.selected2}
-                        onValueChange={this.onValueChange2.bind(this)}
                     >
                         <Picker.Item label="NHTS-4Ps" value="key0" />
                         <Picker.Item label="NHTS-Non-4Ps" value="key1" />
@@ -95,7 +110,9 @@ class Home extends React.Component {
                     <MemberList />
                 </View>
                 <View style={{padding:10,alignItems:'center', justifyContent:'center'}}>
-                <Button rounded success onPress={() => navigate('Home')} >
+                <Button rounded success
+                    onPress={() => this.sampleSubmit()}
+                 >
                     <Text>Submit</Text>
                 </Button>
                 </View>
